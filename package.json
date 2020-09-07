@@ -1,0 +1,46 @@
+{
+  "name": "hackathon",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@triframe/arbiter": "^0.3.4",
+    "@triframe/confectioner": "0.0.3",
+    "@triframe/core": "^0.2.3",
+    "@triframe/s3-storage": "0.0.2",
+    "@triframe/scribe": "^0.1.9",
+    "bcrypt": "^5.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "scripts": {
+    "start": "triframe start"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@triframe/designer": "^0.3.3",
+    "@triframe/mason": "^0.1.4",
+    "babel-preset-triframe": "0.0.5"
+  },
+  "engines": {
+    "node": "14.0.0"
+  }
+}
