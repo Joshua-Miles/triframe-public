@@ -10,7 +10,7 @@
     "@triframe/confectioner": "0.0.3",
     "@triframe/core": "^0.2.3",
     "@triframe/s3-storage": "0.0.2",
-    "@triframe/scribe": "^0.1.9",
+    "@triframe/scribe": "^0.2.0",
     "bcrypt": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
