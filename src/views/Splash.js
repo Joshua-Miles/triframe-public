@@ -31,8 +31,7 @@ export const Splash = tether(function* ({ redirect }) {
                     <Area alignX="center" alignY="center">
                         <Area inline>
                             <Title>Δ TriFrame</Title>
-                           
-                                <Heading>v1.0</Heading>
+                            <Heading>v1.0</Heading>
                             <br />
                         </Area>
                         <Area inline alignX="center">
