@@ -34,8 +34,8 @@ export class Notification extends Resource {
     delete
 
     @hidden
-    static async send({ userId, message, path = null }){
-        return await Notification.create({ userId, message, path })
+    static async send({ userId, message, icon, path = null }){
+        return await Notification.create({ userId, message, icon, path })
     }
 
 }   

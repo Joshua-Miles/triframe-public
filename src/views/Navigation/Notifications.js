@@ -7,7 +7,7 @@ export const Notifications = tether(function* ({ Api, redirect, useContext }) {
     const { User } = Api
 
     const currentUser = yield useContext(CurrentUser)
-    if(currentUser === null) return null
+    if (currentUser === null) return null
 
     const menu = yield { isVisible: false }
 
@@ -20,34 +20,31 @@ export const Notifications = tether(function* ({ Api, redirect, useContext }) {
         menu.isVisible = false
     }
 
-    const bellButton = (
+    return (
         <>
             <Button icon="bell" onPress={showMenu} />
             {when(currentUser.numberOfUnReadNotifications > 0, () => (
-                <Badge style={{ position: 'absolute', top: 15, right: 10 }}>
+                <Badge style={{ position: 'absolute', top: 10, right: 55 }}>
                     {currentUser.numberOfUnReadNotifications}
                 </Badge>
             ))}
+            <Menu visible={menu.isVisible} anchor={{ x: window.innerWidth - 300, y: 5 }} onDismiss={hideMenu}>
+                {when(currentUser.notifications.length > 0, () => (
+                    currentUser.notifications.map(notification => (
+                        <Menu.Item
+                            icon={notification.icon}
+                            title={notification.message}
+                            onPress={() => redirect(notification.path)}
+                        />
+                    ))
+                ),
+                    otherwise(() => (
+                        <Menu.Item
+                            title="No Notifications to Display"
+                        />
+                    ))
+                )}
+            </Menu>
         </>
-    )
-
-    return (
-        <Menu visible={menu.isVisible} anchor={bellButton} onDismiss={hideMenu}>
-            {when(currentUser.notifications.length > 0, () => (
-                currentUser.notifications.map(notification => (
-                    <Menu.Item
-                        icon={notification.icon}
-                        title={notification.message}
-                        onPress={() => redirect(notification.path)}
-                    />
-                ))
-            ),
-                otherwise(() => (
-                    <Menu.Item
-                        title="No Notifications to Display"
-                    />
-                ))
-            )}
-        </Menu>
     )
 })

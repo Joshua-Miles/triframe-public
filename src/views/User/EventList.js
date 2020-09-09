@@ -12,7 +12,7 @@ export const EventList = tether(function* ({ Api, redirect }) {
         <>
             <Heading>Events</Heading>
             <Grid>
-                <Column xs={6}>
+                <Column xs={12} md={6}>
                     {when(events.length > 0, () => (
                         events.map(event => (
                             <Section>

@@ -23,7 +23,7 @@ export const Register = tether(function* ({ Api }) {
             <Navigation.Bar />
             <Container>
                 <Grid>
-                    <Column xs={6}>
+                    <Column xs={12} md={6}>
                         <Title>Register</Title>
                         <VUser.Form
                             value={form}

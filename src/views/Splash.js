@@ -11,10 +11,10 @@ export const Splash = tether(function* ({ redirect }) {
 
     let navigation = yield { opacity: 0 }
 
-    let scroll = () => container.current.scrollTo(513)
+    let scroll = () => container.current.scrollTo(window.innerHeight - 60)
 
     let handleScroll = (e) => {
-        let maxScroll = 513
+        let maxScroll = window.innerHeight - 60
         let percentageScrolled = e.nativeEvent.contentOffset.y / maxScroll
         navigation.opacity = percentageScrolled
     }
@@ -92,7 +92,7 @@ export const Splash = tether(function* ({ redirect }) {
                     </Section>
                     <Section>
                         <Grid>
-                            <Column xs={6}>
+                            <Column xs={12} md={6}>
                                 <VEvent.List />
                             </Column>
                         </Grid>

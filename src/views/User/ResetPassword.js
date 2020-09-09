@@ -1,5 +1,5 @@
 import React from 'react'
-import { tether, PasswordInput, Container, Title, Button, Area, HelperText, Heading, Paragraph, Section } from '@triframe/designer'
+import { tether, PasswordInput, Container, Title, Button, Area, HelperText, Heading, Grid, Column, Paragraph, Section } from '@triframe/designer'
 import { when, otherwise } from '@triframe/confectioner'
 
 export const ResetPassword = tether(function* ({ Api, useParams, redirect }) {
@@ -9,7 +9,7 @@ export const ResetPassword = tether(function* ({ Api, useParams, redirect }) {
     const { key } = yield useParams()
 
     const state = yield {
-        error: null, 
+        error: null,
         success: false
     }
 
@@ -40,47 +40,51 @@ export const ResetPassword = tether(function* ({ Api, useParams, redirect }) {
 
     return (
         <Container>
-            <Title>Reset Password</Title>
-            {when(state.success === false, () => (
-                <>
-                    <Section>
-                        <PasswordInput
-                            label="Password"
-                            value={updatedUser.password}
-                            onChange={input => updatedUser.password = input}
-                        />
-                        <HelperText type="error" visible={shouldShowErrorsFor('password')}>
-                            {errorMessageFor('password')}
-                        </HelperText>
-                    </Section>
-                    <Section>
-                        <PasswordInput
-                            label="Confirm Password"
-                            value={updatedUser.confirmPassword}
-                            onChange={input => updatedUser.confirmPassword = input}
-                        />
-                        <HelperText type="error" visible={shouldShowErrorsFor('confirmPassword')}>
-                            {errorMessageFor('confirmPassword')}
-                        </HelperText>
-                    </Section>
-                    <Area alignX="center">
-                        <Button onPress={reset}>
-                            Reset
+            <Grid>
+                <Column xs={12} md={6}>
+                    <Title>Reset Password</Title>
+                    {when(state.success === false, () => (
+                        <>
+                            <Section>
+                                <PasswordInput
+                                    label="Password"
+                                    value={updatedUser.password}
+                                    onChange={input => updatedUser.password = input}
+                                />
+                                <HelperText type="error" visible={shouldShowErrorsFor('password')}>
+                                    {errorMessageFor('password')}
+                                </HelperText>
+                            </Section>
+                            <Section>
+                                <PasswordInput
+                                    label="Confirm Password"
+                                    value={updatedUser.confirmPassword}
+                                    onChange={input => updatedUser.confirmPassword = input}
+                                />
+                                <HelperText type="error" visible={shouldShowErrorsFor('confirmPassword')}>
+                                    {errorMessageFor('confirmPassword')}
+                                </HelperText>
+                            </Section>
+                            <Area alignX="center">
+                                <Button onPress={reset}>
+                                    Reset
                         </Button>
-                    </Area>
-                    <HelperText type="error" visible={state.error != null}>
-                        {state.error}
-                    </HelperText>
-                </>
-            ), otherwise(() => (
-                <Area alignX="center" alignY="center">
-                    <Heading style={{ color: "green" }}>Password Reset</Heading>
-                    <Paragraph>Now you can log in with your new password.</Paragraph>
-                    <Button mode="text" icon="arrow-right" onPress={() => redirect('/login')}>
-                        Login
+                            </Area>
+                            <HelperText type="error" visible={state.error != null}>
+                                {state.error}
+                            </HelperText>
+                        </>
+                    ), otherwise(() => (
+                        <Area alignX="center" alignY="center">
+                            <Heading style={{ color: "green" }}>Password Reset</Heading>
+                            <Paragraph>Now you can log in with your new password.</Paragraph>
+                            <Button mode="text" icon="arrow-right" onPress={() => redirect('/login')}>
+                                Login
                     </Button>
-                </Area>
-            )))}
+                        </Area>
+                    )))}
+                </Column>
+            </Grid>
         </Container>
     )
 })

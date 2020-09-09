@@ -3,6 +3,8 @@ import { Resource } from '@triframe/core'
 import { User } from './User'
 import { hash } from 'bcrypt'
 
+const { APPLICATION_DOMAIN } = process.env
+
 export class PasswordResetRequest extends Resource {
 
     @include(Model)
@@ -45,8 +47,15 @@ export class PasswordResetRequest extends Resource {
 
         await PasswordResetRequest.create({ userId: user.id, key })
 
-        // send email
-        console.log(`DOMAIN/reset-password/${key}`)
+        await user.sendEmail(`TriFrame: Password Reset Request`, `
+            <div>
+                <h1>TriFrame: Password Reset Request</h1>
+                <p>Follow this link to reset your password:</p>
+                <a href="${APPLICATION_DOMAIN}/reset-password/${key}">Reset Password</a>
+                <p>This link will expire in 2 hours.</p>
+                <p>If you have not requested that your password be reset, please ignore this email.</p>
+            </div>
+        `)
 
         return true
     }

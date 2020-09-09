@@ -1,5 +1,5 @@
 import React from 'react'
-import { tether, TextInput, Container, Title, Button, Area, HelperText, Heading, Paragraph } from '@triframe/designer'
+import { tether, TextInput, Container, Title, Button, Area, HelperText, Heading, Paragraph, Grid, Column } from '@triframe/designer'
 import { when, otherwise } from '@triframe/confectioner'
 
 export const ForgotPassword = tether(function* ({ Api }) {
@@ -33,33 +33,36 @@ export const ForgotPassword = tether(function* ({ Api }) {
 
     return (
         <Container>
-            <Title>Forgot Password</Title>
-            {when(state.success === false, () => (
-                <>
-                    <TextInput
-                        label="Email"
-                        value={state.email}
-                        onChange={input => state.email = input}
-                    />
-                    <Area alignX="center">
-                        <Button onPress={sendRequest}>
-                            Reset
+            <Grid>
+                <Column xs={12} md={6}>
+                    <Title>Forgot Password</Title>
+                    {when(state.success === false, () => (
+                        <>
+                            <TextInput
+                                label="Email"
+                                value={state.email}
+                                onChange={input => state.email = input}
+                            />
+                            <Area alignX="center">
+                                <Button onPress={sendRequest}>
+                                    Reset
+                                </Button>
+                            </Area>
+                            <HelperText type="error" visible={state.error != null}>
+                                {state.error}
+                            </HelperText>
+                        </>
+                    ), otherwise(() => (
+                        <Area alignX="center" alignY="center">
+                            <Heading style={{ color: "green" }}>Request Sent</Heading>
+                            <Paragraph>Check your email for instructions to finish reseting your password.</Paragraph>
+                            <Button mode="text" icon="arrow-left" onPress={resetState}>
+                                Back
                     </Button>
-                    </Area>
-                    <HelperText type="error" visible={state.error != null}>
-                        {state.error}
-                    </HelperText>
-                </>
-            ), otherwise(() => (
-                <Area alignX="center" alignY="center">
-                    <Heading style={{ color: "green"}}>Request Sent</Heading>
-                    <Paragraph>Check your email for instructions to finish reseting your password.</Paragraph>
-                    <Button mode="text" icon="arrow-left" onPress={resetState}>
-                        Back
-                    </Button>
-                </Area>
-            )))}
-
+                        </Area>
+                    )))}
+                </Column>
+            </Grid>
         </Container>
     )
 })

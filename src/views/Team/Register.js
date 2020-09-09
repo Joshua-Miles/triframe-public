@@ -27,7 +27,7 @@ export const Register = tether(function* ({ Api, redirect }) {
 
     return (
         <Grid>
-            <Column xs={6}>
+            <Column xs={12} md={6}>
                 <Heading>Register New Team</Heading>
                 <Paragraph>Once registered, you will be able to invite other users to join your team.</Paragraph>
                 <Paragraph>DO NOT register a new team if you intend to join an existing one.</Paragraph>

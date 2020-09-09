@@ -4,6 +4,7 @@ import { hash, compare } from 'bcrypt'
 import { emailRequirements, passwordRequirements } from '../mixins/validations'
 import { thisIsMe, iAmAnAdmin } from '../mixins/authorizations'
 import { Notification } from './Notification'
+import { emailServiceFor } from '../services/emailServiceFor'
 
 export class User extends Resource {
 
@@ -64,6 +65,8 @@ export class User extends Resource {
     @readonly
     team = null
 
+    sendEmail = emailServiceFor(this)
+
     @hidden
     static create
 
@@ -72,10 +75,9 @@ export class User extends Resource {
 
     @hiddenUnless(thisIsMe)
     async clearNotifications(){
-        await sql`
-            UPDATE notifications SET unRead = false WHERE userId = ${this.id}
-        `
-        Notification.emit('*.changed.unRead')
+        let notifications = await Notification.where({ userId: this.id, unRead: true })
+        if(notifications.length) Notification.emit('*.changed.unRead')
+        notifications.forEach(notification => notification.unRead = false)
     }
 
     @session

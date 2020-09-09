@@ -36,7 +36,7 @@ export const Invite = tether(function* ({ Api, useParams, useContext }) {
         <>
             <Heading>Invite Members to {team.name}</Heading>
             <Grid>
-                <Column xs={6}>
+                <Column xs={12} md={6}>
                     <Area>
                         <TextInput
                             placeholder="Search..."

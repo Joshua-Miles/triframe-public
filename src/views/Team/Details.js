@@ -17,10 +17,10 @@ export const Details = tether(function* ({ redirect, useContext }) {
     return (
         <>
             <Grid base={3} style={{ flex: 1 }}>
-                <Column xs={2} style={{ height: '100%' }}>
+                <Column xs={12} md={2} style={{ height: '100%' }}>
                     <VTeam.Messages team={team} />
                 </Column>
-                <Column>
+                <Column xs={12} md={1}>
                     <Card elevation={2}>
                         <Card.Content>
                             <Heading>Invites</Heading>

@@ -5,7 +5,7 @@ export function* CurrentUser({ Api }) {
     const currentUser = yield User.current(`
         *,
         numberOfUnReadNotifications,
-        notifications(orderBy: notifications.id) {
+        notifications(orderBy: notifications.id, orderDirection: DESC) {
             *
         },
         invites {

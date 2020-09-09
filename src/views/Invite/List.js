@@ -21,7 +21,7 @@ export const InviteList = tether(function* ({ Api, redirect, useContext }) {
                     <Paragraph>Accept an invite to join a project team:</Paragraph>
                     <Grid>
                         {currentUser.invites.map(invite => (
-                            <Column xs={6}>
+                            <Column xs={12} md={6}>
                                 <VInvite.Card invite={invite} />
                             </Column>
                         ))}

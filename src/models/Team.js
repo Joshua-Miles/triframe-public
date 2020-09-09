@@ -67,7 +67,7 @@ export class Team extends Resource {
     let currentUser = await User.read(loggedInUserId)
     await Notification.send({ userId, 
       icon: 'call-received',
-      message: `You have been invited to join ${this.name} by ${currentUser.name}`,
+      message: `${currentUser.name} has invited you to join ${this.name}`,
       path: `/invites/${invite.id}`
     })
     return invite

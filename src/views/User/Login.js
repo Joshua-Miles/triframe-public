@@ -33,7 +33,7 @@ export const Login = tether(function* ({ Api, redirect }) {
             <Navigation.Public />
             <Container>
                 <Grid>
-                    <Column xs={6}>
+                    <Column xs={12} md={6}>
                         <Title>Login</Title>
                         <Section>
                             <TextInput
