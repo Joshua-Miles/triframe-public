@@ -6,7 +6,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "@triframe/arbiter": "^0.3.8",
+    "@triframe/arbiter": "^0.3.9",
     "@triframe/confectioner": "0.0.3",
     "@triframe/core": "^0.2.4",
     "@triframe/s3-storage": "0.0.2",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@triframe/designer": "^0.3.5",
+    "@triframe/designer": "^0.3.6",
     "@triframe/mason": "^0.1.4",
     "babel-preset-triframe": "0.0.5"
   },
