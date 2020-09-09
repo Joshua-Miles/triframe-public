@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@triframe/designer": "^0.3.3",
+    "@triframe/designer": "^0.3.4",
     "@triframe/mason": "^0.1.4",
     "babel-preset-triframe": "0.0.5"
   },
