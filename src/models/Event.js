@@ -1,5 +1,5 @@
 import { Resource } from '@triframe/core'
-import { Model, include, timestamp, stream, string, text, hasMany, session, readonlyUnless } from '@triframe/scribe'
+import { sql, Model, include, timestamp, stream, string, text, hasMany, session, readonlyUnless } from '@triframe/scribe'
 import { EventRegistration } from './EventRegistration'
 import { iAmAnAdmin } from '../mixins/authorizations'
 import { derive } from '@triframe/scribe/dist/decorators'
@@ -63,10 +63,29 @@ export class Event extends Resource {
   @session
   @stream
   static *feed({ loggedInUserId }){
-    return yield Event.list(`
-      *,
-      isRegistered(userId: ${loggedInUserId})
-    `)
+    return yield sql`
+      SELECT { 
+        events {
+          *,
+          isRegistered(userId: ${loggedInUserId})
+        }
+      }
+      ORDER BY events.startTime
+    `
   }
+
+  @stream
+  static *orderedList(){
+    return yield sql`
+      SELECT { 
+        events {
+          *
+        }
+      }
+      ORDER BY events.startTime
+    `
+  }
+
+
 
 }

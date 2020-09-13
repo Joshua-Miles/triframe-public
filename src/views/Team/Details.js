@@ -28,7 +28,6 @@ export const Details = tether(function* ({ redirect, useContext }) {
                                 <List.Item
                                     left={() => <List.Icon icon={() => <VUser.Avatar user={invite.invitee} size={30} />} />}
                                     title={invite.invitee.name}
-                                    description={invite.invitee.email}
                                 />
                             ))}
                             <Area alignX="right">

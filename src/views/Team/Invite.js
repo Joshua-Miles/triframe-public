@@ -26,7 +26,7 @@ export const Invite = tether(function* ({ Api, useParams, useContext }) {
 
     const search = yield { term: '' }
 
-    const matchesSearch = user => [user.name, user.email].some(field => field.toLowerCase().includes(search.term.toLowerCase()))
+    const matchesSearch = user => [user.name].some(field => field.toLowerCase().includes(search.term.toLowerCase()))
 
     const notInvited = user => team.invited.includes(user) === false
 

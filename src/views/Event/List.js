@@ -6,7 +6,7 @@ import { VEvent } from '.'
 export const EventList = tether(function* ({ Api, redirect }) {
     const { Event } = Api
 
-    const events = yield Event.list()
+    const events = yield Event.orderedList()
 
     return (
         <>

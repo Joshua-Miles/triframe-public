@@ -2,7 +2,7 @@ import { Model, sql, derive, string, hidden, temp, include, readonly, belongsTo,
 import { Resource } from '@triframe/core'
 import { hash, compare } from 'bcrypt'
 import { emailRequirements, passwordRequirements } from '../mixins/validations'
-import { thisIsMe, iAmAnAdmin } from '../mixins/authorizations'
+import { thisIsMe, iAmAnAdmin, either } from '../mixins/authorizations'
 import { Notification } from './Notification'
 import { emailServiceFor } from '../services/emailServiceFor'
 
@@ -20,7 +20,7 @@ export class User extends Resource {
     name = ""
 
     @string
-    @readonlyUnless(thisIsMe)
+    @hiddenUnless(either(thisIsMe, iAmAnAdmin))
     @validate(emailRequirements)
     email = ""
 

@@ -25,8 +25,7 @@ export function* CurrentUser({ Api }) {
             invites {
                 invitee {
                     name,
-                    profileUrl,
-                    email
+                    profileUrl
                 }
             }
         }

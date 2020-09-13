@@ -9,3 +9,6 @@ export const iAmThe = property => ({ session, resource }) => {
 
 export const iAmAnAdmin = ({ session }) => 
     session.loggedInUserRole === 1
+
+
+export const either = (...callbacks) => (payload) => callbacks.some(callback => callback(payload))
