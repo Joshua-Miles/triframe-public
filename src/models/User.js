@@ -129,11 +129,14 @@ export class User extends Resource {
     @session
     @stream
     static *current(session, columns = undefined){
-        return (
+        console.log(session.loggedInUserId)
+        let result = (
             session.loggedInUserId !== null
                 ? yield User.read(session.loggedInUserId, columns)
                 : null
         )
+        console.log('RESULT', result)
+        return result
     }
 
 

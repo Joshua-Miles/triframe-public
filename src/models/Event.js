@@ -1,5 +1,5 @@
 import { Resource } from '@triframe/core'
-import { sql, Model, include, timestamp, stream, string, text, hasMany, session, readonlyUnless } from '@triframe/scribe'
+import { sql, Model, include, timestamp, boolean, stream, string, text, hasMany, session, readonlyUnless } from '@triframe/scribe'
 import { EventRegistration } from './EventRegistration'
 import { iAmAnAdmin } from '../mixins/authorizations'
 import { derive } from '@triframe/scribe/dist/decorators'
@@ -7,6 +7,9 @@ import { derive } from '@triframe/scribe/dist/decorators'
 export class Event extends Resource {
 
   @include(Model)
+
+  @boolean
+  isLecture = false
 
   @readonlyUnless(iAmAnAdmin)
   @timestamp

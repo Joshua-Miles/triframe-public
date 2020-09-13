@@ -30,6 +30,6 @@ export function* CurrentUser({ Api }) {
             }
         }
     `)
-
+console.log(currentUser)
     return currentUser
 }
