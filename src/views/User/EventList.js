@@ -30,7 +30,7 @@ export const EventList = tether(function* ({ Api, redirect }) {
                             </Section>
                             <Section>
                                 <Subheading>Lectures</Subheading>
-                                <Paragraph>Lectures will be recorded and made available the next day</Paragraph>
+                                <Paragraph>Lectures will be recorded and linked here the next day</Paragraph>
                                 {lectures.map(event => (
                                     <Section>
                                         <VUser.EventCard event={event} />

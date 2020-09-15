@@ -41,7 +41,7 @@ export const ForgotPassword = tether(function* ({ Api }) {
                             <TextInput
                                 label="Email"
                                 value={state.email}
-                                onChange={input => state.email = input}
+                                onChange={input => state.email = input.toLowerCase()}
                             />
                             <Area alignX="center">
                                 <Button onPress={sendRequest}>

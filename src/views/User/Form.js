@@ -58,7 +58,7 @@ export const Form = tether(function* ({ Api, props }) {
                 <TextInput
                     label="Email"
                     value={form.email}
-                    onChange={value => form.email = value}
+                    onChange={value => form.email = value.toLowerCase()}
                 />
                 <HelperText type="error" visible={shouldShowErrorsFor('email')}>
                     {errorMessageFor('email')}

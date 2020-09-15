@@ -39,7 +39,7 @@ export const Login = tether(function* ({ Api, redirect }) {
                             <TextInput
                                 label="Email"
                                 value={form.email}
-                                onChange={newEmail => form.email = newEmail}
+                                onChange={newEmail => form.email = newEmail.toLowerCase()}
                             />
                             <HelperText type="error" visible={shouldShowErrorsFor('email')}>
                                 {errorMessageFor('email')}
@@ -58,7 +58,7 @@ export const Login = tether(function* ({ Api, redirect }) {
                         <Area inline alignX="center">
                             <Button onPress={handleSubmit}>
                                 Submit
-                </Button>
+                            </Button>
                         </Area>
                         <HelperText type="error" visible={error.message != null}>
                             {error.message}
