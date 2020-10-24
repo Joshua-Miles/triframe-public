@@ -137,4 +137,8 @@ export class User extends Resource {
     }
 
 
+    @hidden
+    static truncate
+
+
 }

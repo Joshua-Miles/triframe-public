@@ -1,11 +1,19 @@
 import React from 'react'
-import { tether, Heading, Section, TextInput, HelperText, Button, Paragraph, Grid, Column } from "@triframe/designer"
+import { tether, Area, List, Card, Heading, Section, TextInput, HelperText, Button, Paragraph, Grid, Column } from "@triframe/designer"
+import { CurrentUser } from '../../contexts/CurrentUser'
+import { when, otherwise } from '@triframe/confectioner'
+import { VUser } from '../User'
 
-export const Register = tether(function* ({ Api, redirect }) {
+export const Register = tether(function* ({ Api, redirect, useContext }) {
 
-    const { Team } = Api
+    const { User, Team } = Api
+
+    const currentUser = yield useContext(CurrentUser)
+    if (currentUser === null) return null
 
     const form = yield new Team({ name: '' })
+
+    const search = yield { term: '' }
 
     const error = yield { message: null }
 
@@ -24,6 +32,12 @@ export const Register = tether(function* ({ Api, redirect }) {
             showAllErrors()
         }
     }
+
+    const users = yield User.where({ teamId: null })
+
+    const matchesSearch = user => [user.name].some(field => field.toLowerCase().includes(search.term.toLowerCase()))
+
+    const searchResults = users.filter(user => matchesSearch(user))
 
     return (
         <Grid>
@@ -47,6 +61,32 @@ export const Register = tether(function* ({ Api, redirect }) {
                 <HelperText type="error" visible={error.message !== null}>
                     {error.message}
                 </HelperText>
+            </Column>
+            <Column xs={12} md={6}>
+                <Card style={{ marginLeft: 20}}>
+                    <Card.Content>
+                        <Heading>Currently Awaiting a Team:</Heading>
+                        <TextInput
+                            placeholder="Search..."
+                            value={search.term}
+                            onChange={value => search.term = value}
+                        />
+                        {when(searchResults.length > 0, () => (
+                            searchResults.map(user => (
+                                <List.Item
+                                    left={() => <List.Icon icon={() => <VUser.Avatar user={user} size={30} />} />}
+                                    title={user.name}
+                                />
+                            ))
+                        ), otherwise(() => (
+                            <Section>
+                                <Area alignX="center" alignY="center">
+                                    <Heading>No users to display, check back later...</Heading>
+                                </Area>
+                            </Section>
+                        )))}
+                    </Card.Content>
+                </Card>
             </Column>
         </Grid>
     )
