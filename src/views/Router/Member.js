@@ -7,6 +7,7 @@ import { VUser } from '../User'
 import { VEvent } from '../Event'
 import { VAdmin } from '../Admin'
 import { CurrentUser } from '../../contexts/CurrentUser'
+import { ApiDocumentation } from '../Documentation/ApiDocumentation'
 
 
 
@@ -16,8 +17,8 @@ export const Member = tether(function* ({ Api, useContext }) {
     const { User } = Api
 
     let currentUser = yield useContext(CurrentUser)
-    if(currentUser === null) return null
-    
+    if (currentUser === null) return null
+
     let defaultView = currentUser.teamId === null ? '/invites' : '/team'
 
     return (
@@ -29,15 +30,17 @@ export const Member = tether(function* ({ Api, useContext }) {
             <Route path="/events" component={contain(VUser.EventList)} />
             <Route path="/teams/:teamId/invite" component={contain(VTeam.Invite)} />
             <Route path="/profile" component={contain(VUser.Profile)} />
+            <Route exact path="/documentation" component={ApiDocumentation} />
+            <Route exact path="/documentation/:itemId?" component={ApiDocumentation} />
             {when(currentUser.role === User.Roles.Admin, () => (
                 <Switch>
                     <Route exact path="/admin" component={contain(VAdmin.Home)} />
                     <Route path="/admin/events/new" component={contain(VEvent.New)} />
                     <Route path="/admin/events/:id/edit" component={contain(VEvent.Edit)} />
-                    <Route path="/" render={() =>  <Redirect to={defaultView} />} />
+                    <Route path="/" render={() => <Redirect to={defaultView} />} />
                 </Switch>
             ))}
-            <Route path="/" render={() =>  <Redirect to={defaultView} />} />
+            <Route path="/" render={() => <Redirect to={defaultView} />} />
         </Switch>
     )
 })

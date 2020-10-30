@@ -7,6 +7,7 @@ serve(path.resolve(__dirname, './models'), {
     cdnUploadHandler,
     session: {
         loggedInUserId: null,
-        loggedInUserRole: null
+        loggedInUserRole: null,
+        packageIds: []
     },
 })
