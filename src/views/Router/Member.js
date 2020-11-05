@@ -8,6 +8,7 @@ import { VEvent } from '../Event'
 import { VAdmin } from '../Admin'
 import { CurrentUser } from '../../contexts/CurrentUser'
 import { ApiDocumentation } from '../Documentation/ApiDocumentation'
+import { GuideViewer } from '../Guide/GuideViewer'
 
 
 
@@ -32,6 +33,8 @@ export const Member = tether(function* ({ Api, useContext }) {
             <Route path="/profile" component={contain(VUser.Profile)} />
             <Route exact path="/documentation" component={ApiDocumentation} />
             <Route exact path="/documentation/:itemId?" component={ApiDocumentation} />
+            <Route exact path="/guides" component={contain(GuideViewer)} />
+            <Route exact path="/guides/:id" component={contain(GuideViewer)} />
             {when(currentUser.role === User.Roles.Admin, () => (
                 <Switch>
                     <Route exact path="/admin" component={contain(VAdmin.Home)} />

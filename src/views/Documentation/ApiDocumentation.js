@@ -29,17 +29,17 @@ export const ApiDocumentation = tether(function* ({ models, props, useContext, u
     let $item = null
     let groupId
 
-    
+
 
     const packageIds = yield Session.getSelectedPackageIds()
 
     const selected = yield { groupId: parseInt(groupId) }
 
     if (itemId) {
-        $item = entities[itemId]  
+        $item = entities[itemId]
         groupId = $item.datatype.name === 'group' ? $item.id : $item.group?.id
         ItemComponent = itemComponents[$item.datatype.name]
-        if(!ItemComponent) return <Redirect to="/documentation" />
+        if (!ItemComponent) return <Redirect to="/documentation" />
     }
 
     const selectedPackages = packages.filter($package => packageIds.includes($package.id))
@@ -64,7 +64,7 @@ export const ApiDocumentation = tether(function* ({ models, props, useContext, u
                     ))}
                 </Area>
             </Area>
-            <Grid style={{ display:'flex', flex: 1 }}>
+            <Grid style={{ display: 'flex', flex: 1 }}>
                 <Column xs={3} style={{ height: '95%' }}>
                     {selectedPackages.length > 0
                         ? (
@@ -99,9 +99,11 @@ export const ApiDocumentation = tether(function* ({ models, props, useContext, u
                 </Column>
                 <Column xs={9} style={{ height: '95%' }}>
                     <Container>
-                        {$item &&
-                            <ItemComponent id={$item.id} />
-                        }
+                        <div style={{ overflowX: 'scroll' }}>
+                            {$item &&
+                                <ItemComponent id={$item.id} />
+                            }
+                        </div>
                     </Container>
                 </Column>
             </Grid>

@@ -11,18 +11,18 @@ export const Designer = draw(({ a, any, warning, either, optional, jsx }) => (
             .describe('Should wrap the <App/>, providing models and routing utilities to any "tethered" components'),
         
         tether: a.function({
-            component: a.function({
+            tetheredComponent: a.function({
                 props: a.object
                     .describe('Containing any props passed to the component'),
                 Api: a.object
                     .describe('A object containing everything served by the connected Api'),
                 redirect: a.function({ route: a.string })
                     .describe('A function to send the user to a different route'),
+                useParams: a.function
+                    .describe('Returns a Pipe that emits the current params from the route'),
                 useContext: a.function({ context: a.function })
                     .describe('Accepts a generator function and turns it into a Pipe. Only one Pipe will be created per context function, and will be shared by all components that use that context')
-                    .returns(a('Pipe').thatEmits(a.object)),
-                useParams: a.function
-                    .describe('Returns a Pipe that emits the current params from the route')
+                    .returns(a('Pipe').thatEmits(a.object))
             })
         })
             .returns(a.component),
@@ -259,32 +259,34 @@ export const Designer = draw(({ a, any, warning, either, optional, jsx }) => (
 
         Inputs: a.group({
             TextInput: a.component({
+                label: a.string
+                    .describe('A label the user sees to identify the input'),
                 value: a.string,
-                mode: a.string
-                    .describe('One of: outlined | flat'),
                 onChange: a.function({ value: a.string })
-                    .describe('Invoked on each keystroke within the input')
+                    .describe('Invoked on each keystroke within the input'),
+                mode: a.optional.string
+                    .describe('One of: outlined | flat'),
             }),
             PasswordInput: a.component({
                 value: a.string,
-                mode: a.string
-                    .describe('One of: outlined | flat'),
                 onChange: a.function({ value: a.string })
-                    .describe('Invoked on each keystroke within the input')
+                    .describe('Invoked on each keystroke within the input'),
+                mode: a.optional.string
+                    .describe('One of: outlined | flat'),
             }),
             DateInput: a.component({
                 value: a.date,
-                mode: a.string
-                    .describe('One of: outlined | flat'),
                 onChange: a.function({ value: a.date })
-                    .describe('Invoked when a new date is selected')
+                    .describe('Invoked when a new date is selected'),
+                mode: a.optional.string
+                    .describe('One of: outlined | flat'),
             }),
             DateTimeInput: a.component({
                 value: a.date,
-                mode: a.string
-                    .describe('One of: outlined | flat'),
                 onChange: a.function({ value: a.date })
-                    .describe('Invoked when a new date or time is selected')
+                    .describe('Invoked when a new date or time is selected'),
+                mode: a.optional.string
+                    .describe('One of: outlined | flat'),
             }),
             ToggleInput: a.component({
                 value: a.boolean,

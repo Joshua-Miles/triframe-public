@@ -43,8 +43,8 @@ export const IconExplorer = tether(function* ({ props }) {
             </div>
             <Area inline alignX="center">
                 {loop({ from: startingPoint, to: endPoint }, number => (
-                    <Button onPress={() => state.currentPage = number} mode={number == state.currentPage ? "contained" : "outline"}>
-                        {number + 1}
+                    <Button onPress={() => state.currentPage = number} mode={number == state.currentPage ? "contained" : "outline"} >
+                        {`${number + 1}`}
                     </Button>
                 ))}
             </Area>

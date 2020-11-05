@@ -30,8 +30,11 @@ export const Main = tether(function* ({ Api, useRouter, useContext, redirect }) 
                 <Tab selected={pathname === '/events'} onPress={() => redirect('/events')}>
                     Events
                 </Tab>
+                <Tab selected={pathname.startsWith('/guides')} onPress={() => redirect('/guides')}>
+                    Guides
+                </Tab>
                 <Tab selected={pathname.startsWith('/documentation')} onPress={() => redirect('/documentation')}>
-                    Documentation
+                    Docs
                 </Tab>
                 {when(currentUser.role === User.Roles.Admin, () => (
                     <Tab selected={pathname === '/admin'} onPress={() => redirect('/admin')}>
